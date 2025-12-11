@@ -16,8 +16,25 @@ http://www.springframework.org/schema/tx/spring-tx.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <!--放行静态资源，否则页面无法加载样式和图片等。改完要restart才会生效，redeploy可能不会生效-->
+    <security:http pattern="/img/**" security="none"/>
+    <security:http pattern="/css/**" security="none"/>
+    <security:http pattern="/plugins/**" security="none"/>
+
     <security:http auto-config="true" use-expressions="true">
+        <!--放行login.jsp，注意，必须放在/**拦截器的前面-->
+        <security:intercept-url pattern="/login.jsp" access="permitAll()"/>
+        <!--拦截所有请求，只允许角色ROLE_USER用户访问-->
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+
+        <!--配置登录页面和请求，以及失败的页面-->
+        <security:form-login login-page="/login.jsp"
+                             default-target-url="/login"
+                             authentication-failure-url="/failer.jsp"
+                             username-parameter="username"
+                             password-parameter="password"/>
+        <!--配置登出信息-->
+        <security:logout logout-url="/logout" logout-success-url="/logout.jsp"/>
     </security:http>
 
     <security:authentication-manager>
