@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <!-- 页面头部 -->
 <header class="main-header">
 	<!-- Logo -->
@@ -37,8 +38,11 @@
 								<a href="#" class="btn btn-default btn-flat">修改密码</a>
 							</div>
 							<div class="pull-right">
-								<a href="${pageContext.request.contextPath}/login.jsp"
-									class="btn btn-default btn-flat">注销</a>
+								<form action="${pageContext.request.contextPath}/logout" method="post">
+									<security:csrfInput/>
+									<input class="btn btn-default btn-flat" type="submit" value="退出登录">
+								</form>
+
 							</div>
 						</li>
 					</ul></li>
