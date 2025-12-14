@@ -37,7 +37,12 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <security:logout logout-url="/logout" logout-success-url="/logout.jsp"/>
     </security:http>
 
+    <!--注入密码加密类-->
+    <bean name="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="userServiceImpl" />
+        <security:authentication-provider user-service-ref="userServiceImpl">
+            <security:password-encoder ref="bCryptPasswordEncoder"/>
+        </security:authentication-provider>
     </security:authentication-manager>
 </beans>

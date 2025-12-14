@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,13 +27,19 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void save(SysUser user) {
+        String password = Optional.ofNullable(user)
+                .get()
+                .getPassword();
+        user.setPassword(bCryptPasswordEncoder.encode(password));
         userDao.save(user);
+        LOGGER.info("用户保存成功：" + user);
     }
 
     @Override
@@ -80,7 +87,7 @@ public class UserServiceImpl implements UserService {
                     .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
                     .collect(Collectors.toList());
             // Spring Security 默认认为密码是密文，拼接{noop}表示密码是明文，不需要加密
-            UserDetails userDetails = new User(sysUser.getUsername(), String.format("{noop}%s", sysUser.getPassword()), authorities);
+            UserDetails userDetails = new User(sysUser.getUsername(), sysUser.getPassword(), authorities);
             return userDetails;
         } catch (Exception e) {
             LOGGER.error("加载用户异常", e);
