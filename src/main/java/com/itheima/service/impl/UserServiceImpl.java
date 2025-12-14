@@ -87,7 +87,13 @@ public class UserServiceImpl implements UserService {
                     .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
                     .collect(Collectors.toList());
             // Spring Security 默认认为密码是密文，拼接{noop}表示密码是明文，不需要加密
-            UserDetails userDetails = new User(sysUser.getUsername(), sysUser.getPassword(), authorities);
+            UserDetails userDetails = new User(sysUser.getUsername(),
+                    sysUser.getPassword(),
+                    sysUser.getStatus() == 1,
+                    true,
+                    true,
+                    true,
+                    authorities);
             return userDetails;
         } catch (Exception e) {
             LOGGER.error("加载用户异常", e);
