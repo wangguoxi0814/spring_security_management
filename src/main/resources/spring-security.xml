@@ -20,6 +20,8 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
+    <!--登录失败页面不走拦截器，否则无法跳转到登录失败页面-->
+    <security:http pattern="/failer.jsp" security="none"/>
 
     <security:http auto-config="true" use-expressions="true">
         <!--放行login.jsp，注意，必须放在/**拦截器的前面-->
