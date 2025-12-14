@@ -47,6 +47,12 @@
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
+							<%--这里的name为remember-me，和Spring Security的源码中的保持一致--%>
+							<%-- 源码调用栈：
+									1. AbstractAuthenticationProcessingFilter#successfulAuthentication
+									2. AbstractRememberMeServices#loginSuccess
+									3. AbstractRememberMeServices#rememberMeRequested
+							--%>
 							<label><input type="checkbox" name="remember-me" value="true"> 记住 下次自动登录</label>
 						</div>
 					</div>

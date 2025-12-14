@@ -37,6 +37,8 @@ http://www.springframework.org/schema/security/spring-security.xsd">
                              password-parameter="password"/>
         <!--配置登出信息-->
         <security:logout logout-url="/logout" logout-success-url="/logout.jsp"/>
+        <!--配置remember me拦截器，有效期七天-->
+        <security:remember-me token-validity-seconds="604800"/>
     </security:http>
 
     <!--注入密码加密类-->
