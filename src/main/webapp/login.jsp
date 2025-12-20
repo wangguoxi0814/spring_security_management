@@ -47,7 +47,8 @@
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
-							<%--这里的name为remember-me，和Spring Security的源码中的保持一致--%>
+							<%--这里的name为remember-me，和spring-security.xml中的remember-me-parameter保持一致--%>
+							<%--或者和Spring Security的源码中的保持一致--%>
 							<%-- 源码调用栈：
 									1. AbstractAuthenticationProcessingFilter#successfulAuthentication
 									2. AbstractRememberMeServices#loginSuccess
