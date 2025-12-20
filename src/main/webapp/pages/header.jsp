@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%--引入security动态标签库，方便获取用户名--%>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <!-- 页面头部 -->
 <header class="main-header">
@@ -22,6 +23,7 @@
 						src="${pageContext.request.contextPath}/img/user2-160x160.jpg"
 						class="user-image" alt="User Image">
 					<span class="hidden-xs">
+						<%--获取名字的2中动态标签写法--%>
 							<%--<security:authentication property="principal.username" />--%>
 							<security:authentication property="name" />
 					</span>
