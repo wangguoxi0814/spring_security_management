@@ -87,6 +87,7 @@ public class UserServiceImpl implements UserService {
                     .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
                     .collect(Collectors.toList());
             // Spring Security 默认认为密码是密文，拼接{noop}表示密码是明文，不需要加密
+            // 在spring-security.xml的配置了bCryptPasswordEncoder则不需要拼接{noop}，表示密文密码
             UserDetails userDetails = new User(sysUser.getUsername(),
                     sysUser.getPassword(),
                     sysUser.getStatus() == 1,
