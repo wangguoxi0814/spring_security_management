@@ -48,10 +48,11 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
-    <error-page>
-        <error-code>403</error-code>
-        <location>/403.jsp</location>
-    </error-page>
+<!--    错误处理交给拦截器，见-->
+<!--    <error-page>-->
+<!--        <error-code>403</error-code>-->
+<!--        <location>/403.jsp</location>-->
+<!--    </error-page>-->
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
