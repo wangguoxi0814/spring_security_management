@@ -41,7 +41,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <security:remember-me token-validity-seconds="604800"/>
 
         <!--当用户访问无权限页面时，会报AccessDeniedException，该处理器用户处理改异常，并跳转到403页面-->
-        <security:access-denied-handler error-page="/403.jsp"/>
+<!--        <security:access-denied-handler error-page="/403.jsp"/>-->
     </security:http>
 
     <!--注入密码加密类-->
