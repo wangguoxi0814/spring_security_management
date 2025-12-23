@@ -39,6 +39,9 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <security:logout logout-url="/logout" logout-success-url="/logout.jsp"/>
         <!--配置remember me拦截器，有效期七天-->
         <security:remember-me token-validity-seconds="604800"/>
+
+        <!--当用户访问无权限页面时，会报AccessDeniedException，该处理器用户处理改异常，并跳转到403页面-->
+        <security:access-denied-handler error-page="/403.jsp"/>
     </security:http>
 
     <!--注入密码加密类-->
